@@ -6,13 +6,19 @@ module.exports = function(app) {
     axios.get("https://www.billboard.com/charts/hot-100")
       .then(function(response) {
         const $ = cheerio.load(response.data);
+        let songData = [];
 
         $("div.chart-list")
           .children("div.chart-list-item").each(function(i, element) {
-            // console.log($(this).children("div.chart-list-item__first-row").children("div.chart-list-item__text-wrapper").children("div.chart-list-item__text").children("div.chart-list-item__title").text())
-            console.log($(this).attr("data-artist"));
-            console.log($(this).attr("data-title"));
-          }); 
+            // console.log($(this).attr("data-title"));
+            // console.log($(this).attr("data-artist"));
+            songData.push({
+              title: $(this).attr("data-title"),
+              artist: $(this).attr("data-artist")
+            });
+            // console.log(songData)
+          });
+          res.render("test", {songData: songData}) 
       });
   });
 };

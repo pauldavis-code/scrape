@@ -1,1 +1,5 @@
-<h1 style="text-align: center; min-width: 100vh;">TEST</h1>
+<div class="chartList" style="text-align: center; min-width: 100vh; background-color: gray">
+  {{#each songData}}
+    {{> song-block}}
+  {{/each}}
+</div>
