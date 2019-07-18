@@ -25,12 +25,19 @@ module.exports = function(app) {
           res.render("test", {songData: songData}) 
       });
   });
+
   app.get("/song/:selected", function(req, res) {
     let selected = req.params.selected;
     console.log(selected)
     db.Comment.find({song: selected})
       .then(function(comments) {
-      res.json(comments)
+      console.log(comments)
+      const data = {
+        song: selected,
+        comments: comments
+      };
+
+      res.render("selectedComments", {data: data});
     }).catch(function(error) {
       console.log(error)
     });
