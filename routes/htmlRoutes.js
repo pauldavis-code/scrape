@@ -1,5 +1,8 @@
 const axios = require("axios");
-const cheerio = require("cheerio")
+const cheerio = require("cheerio");
+
+// Require all models
+const db = require("./../models/");
 
 module.exports = function(app) {
   app.get("/", function(req, res) {
@@ -22,4 +25,14 @@ module.exports = function(app) {
           res.render("test", {songData: songData}) 
       });
   });
+  app.get("/song/:selected", function(req, res) {
+    let selected = req.params.selected;
+    console.log(selected)
+    db.Comment.find({song: selected})
+      .then(function(comments) {
+      res.json(comments)
+    }).catch(function(error) {
+      console.log(error)
+    });
+  })
 };
