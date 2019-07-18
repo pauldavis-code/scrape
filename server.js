@@ -23,7 +23,9 @@ app.use(express.static("public"));
 //=== MONGOOSE
 const mongoose = require('mongoose');
 
-mongoose.connect("mongodb://localhost/CommentsDB", { useNewUrlParser: true });
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/CommentsDB";
+
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
 require("./routes/routes")(app)
 
