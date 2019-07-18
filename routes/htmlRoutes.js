@@ -8,13 +8,14 @@ module.exports = function(app) {
         const $ = cheerio.load(response.data);
         let songData = [];
 
-        $("div.chart-list")
-          .children("div.chart-list-item").each(function(i, element) {
+        $("div.chart-list").find("div.chart-list-item").each(function(i, element) {
             // console.log($(this).attr("data-title"));
             // console.log($(this).attr("data-artist"));
+            console.log($(this).find("div.chart-list-item__image-wrapper").find("img").attr("src"))
             songData.push({
               title: $(this).attr("data-title"),
               artist: $(this).attr("data-artist")
+              // picture: $(this).children("div.chart-list-item__image-wrapper").find("img").attr("src")
             });
             // console.log(songData)
           });
