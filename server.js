@@ -4,7 +4,9 @@ const express = require("express");
 const PORT = process.env.PORT || 3000
 const app = express();
 
-require("./routes/htmlRoutes")(app)
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.static("public"));
 
 app.listen(PORT, () => console.log(`running on port ${PORT}`))
 
@@ -22,4 +24,7 @@ app.use(express.static("public"));
 const mongoose = require('mongoose');
 
 mongoose.connect("mongodb://localhost/CommentsDB", { useNewUrlParser: true });
+
+require("./routes/routes")(app)
+
 

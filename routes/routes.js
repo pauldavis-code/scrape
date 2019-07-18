@@ -2,7 +2,7 @@ const axios = require("axios");
 const cheerio = require("cheerio");
 
 // Require all models
-const db = require("./../models/");
+const db = require("../models");
 
 module.exports = function(app) {
   app.get("/", function(req, res) {
@@ -41,5 +41,17 @@ module.exports = function(app) {
     }).catch(function(error) {
       console.log(error)
     });
+  })
+
+  app.post("/api/:song", function(req, res) {
+    let song = req.params.song;
+
+    db.Comment.create(req.body)
+      .then(function(data) {
+        res.json(data)
+      })
+      .catch(function(error) {
+        res.json(error);
+      })
   })
 };
