@@ -14,7 +14,7 @@ module.exports = function(app) {
         $("div.chart-list").find("div.chart-list-item").each(function(i, element) {
             // console.log($(this).attr("data-title"));
             // console.log($(this).attr("data-artist"));
-            console.log($(this).find("div.chart-list-item__image-wrapper").find("img").attr("src"))
+            // console.log($(this).find("div.chart-list-item__image-wrapper").find("img").attr("src"))
             songData.push({
               title: $(this).attr("data-title"),
               artist: $(this).attr("data-artist")
@@ -22,7 +22,7 @@ module.exports = function(app) {
             });
             // console.log(songData)
           });
-          res.render("test", {songData: songData}) 
+          res.render("list", {songData: songData}) 
       });
   });
 
